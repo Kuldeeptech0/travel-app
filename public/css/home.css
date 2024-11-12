@@ -1,0 +1,46 @@
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/travel-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.featured-destinations {
+    padding: 4rem 0;
+    background: #f8f9fa;
+}
+
+.destination-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-5px);
+}
+
+.cta-section {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 0;
+}
+
+.btn-explore {
+    background: #e67e22;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-explore:hover {
+    background: #d35400;
+}
