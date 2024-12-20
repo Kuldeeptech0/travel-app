@@ -1,5 +1,5 @@
 
-@extends('layout.mainlayout')
+@extends('layout.adminlayout')
 @include('pages.admin.component.sidebar')
 @section('content')
 
