@@ -2,69 +2,72 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PackageController;
 
 /**
  * Public Routes
- * These routes are accessible to all users without authentication.
  */
 Route::get('/', function () {
-    return view('pages.home.index'); // Home page view
+    return view('pages.home.index');
 })->name('index');
 
 Route::get('/package', function () {
-    return view('pages.packages.index'); // Package listing view
+    return view('pages.packages.index');
 })->name('packages');
 
 Route::get('/singlepackage', function () {
-    return view('pages.home.sinlgepackage'); // singlePackage view
+    return view('pages.home.singlepackage');
 })->name('singlepackage');
-
-
 
 /**
  * Admin Authentication Routes
- * Handles admin login and logout functionality.
  */
 Route::get('/admin/login', function () {
-    return view('pages.admin.auth.login'); // Admin login form view
+    return view('pages.admin.auth.login');
 })->name('login');
 
-// Process login request
 Route::post('/admin/login', [LoginController::class, 'login'])->name('admin.login.process');
-
-// Logout route for admin
 Route::get('/admin/logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 /**
  * Protected Admin Routes
- * Routes under the `/admin` prefix are only accessible to authenticated admins.
  */
 Route::prefix('admin')->middleware('auth')->group(function () {
-    // Admin Dashboard
     Route::get('/', function () {
-        return view('pages.admin.index'); // Admin dashboard view
+        return view('pages.admin.index');
     })->name('admin.dashboard');
 
-    // Admin History
     Route::get('/history', function () {
-        return view('pages.admin.history'); // Admin history view
+        return view('pages.admin.history');
     })->name('admin.history');
 
-    // Admin Location
     Route::get('/location', function () {
         return view('pages.admin.location');
     })->name('admin.location');
 
-    // Admin Packages
-    Route::get('/addpackage', function () {
-        return view('pages.admin.addpackage');
-    })->name('admin.addpackage');
-
-    // package-categories
     Route::get('/package-categories', function () {
         return view('pages.admin.packagecategories');
     })->name('admin.packagecategories');
-});
+
+    Route::get('/profile', function () {
+        return view('pages.profile.index');
+    })->name('admin.profile');
+
+    Route::get('/users', function () {
+        return view('pages.admin.users');
+    })->name('admin.users');
+
+
+        Route::get('/packages/create', [PackageController::class, 'create'])->name('admin.addpackage');
+        Route::post('/packages', [PackageController::class, 'store'])->name('packages.store');
+        Route::get('/packages/{package}/edit', [PackageController::class, 'edit'])->name('packages.edit');
+        Route::put('/packages/{package}', [PackageController::class, 'update'])->name('packages.update');
+        Route::delete('/packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
+        Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
+
+
+  });
 
 
 
+Route::get('/package/{id}', [PackageController::class, 'show'])->name('package.show');
