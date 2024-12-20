@@ -1,4 +1,4 @@
-@extends('layout.mainlayout')
+@extends('layout.adminlayout')
 @section('content')
 @include('pages.admin.component.sidebar')
 <div class="p-4 sm:ml-64">
