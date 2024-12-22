@@ -2,122 +2,176 @@
 
 @section('content')
 <div class="flex">
-    <!-- Sidebar -->
     @include('pages.admin.component.sidebar')
 
-    <!-- Main Content Area -->
-    <div class="flex-1 ml-64"> <!-- Added ml-64 for sidebar width offset -->
-        <!-- Top Navigation Bar -->
-        <nav class="bg-white shadow-md px-6 py-4 fixed right-0 left-64 z-10"> <!-- Fixed nav with left offset -->
+    <div class="flex-1 ml-64 bg-gray-100 min-h-screen">
+        <nav class="bg-white shadow-md px-6 py-4 fixed right-0 left-64 z-10">
             <div class="flex items-center justify-between">
-                <h2 class="text-xl font-semibold text-gray-800">Dashboard</h2>
+                <h2 class="text-xl font-semibold text-gray-800">Travel Dashboard</h2>
                 <div class="flex items-center space-x-4">
-                    <span class="text-gray-600">Admin Name</span>
+                    <span class="text-gray-600">Welcome, Admin</span>
                     <img class="h-8 w-8 rounded-full" src="https://ui-avatars.com/api/?name=Admin" alt="Admin">
                 </div>
             </div>
         </nav>
 
-        <!-- Dashboard Content -->
-        <div class="p-6 mt-16"> <!-- Added top margin to account for fixed nav -->
+        <div class="p-6 mt-16">
             <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-                <!-- Existing cards remain unchanged -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+                    <p class="text-2xl font-bold">₹8,45,290</p>
+                    <span class="text-green-500 text-sm">+12.5% from last month</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-gray-500 text-sm">Active Bookings</h3>
+                    <p class="text-2xl font-bold">245</p>
+                    <span class="text-green-500 text-sm">+8.1% from last week</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-gray-500 text-sm">Total Users</h3>
+                    <p class="text-2xl font-bold">1,890</p>
+                    <span class="text-green-500 text-sm">+5.4% new users</span>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h3 class="text-gray-500 text-sm">Destinations</h3>
+                    <p class="text-2xl font-bold">48</p>
+                    <span class="text-blue-500 text-sm">Active locations</span>
+                </div>
+            </div>
+            <!-- Replace the existing graph and destinations section with this -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <!-- Circular Revenue Graph -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h4 class="text-lg font-semibold mb-4">Revenue Distribution</h4>
+                    <div style="height: 300px;"> <!-- Fixed height container -->
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Monthly Bookings Graph -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h4 class="text-lg font-semibold mb-4">Monthly Bookings</h4>
+                    <div style="height: 300px;"> <!-- Fixed height container -->
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Top Destinations -->
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h4 class="text-lg font-semibold mb-4">Popular Destinations</h4>
+                    <div class="space-y-4">
+                        <div class="relative rounded-lg overflow-hidden h-24">
+                            <img src="{{asset('asset/images/darjeeling-4998356.jpg')}}" class="w-full h-full object-cover" alt="Darjeeling">
+                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                                <p class="font-semibold">Darjeeling</p>
+                            </div>
+                        </div>
+                        <div class="relative rounded-lg overflow-hidden h-24">
+                            <img src="{{asset('asset/images/small-town-near-blue-body-water-surrounded-by-beautiful-mountains.jpg')}}" class="w-full h-full object-cover" alt="Sikkim">
+                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                                <p class="font-semibold">Sikkim</p>
+                            </div>
+                        </div>
+                        <div class="relative rounded-lg overflow-hidden h-24">
+                            <img src="{{asset('asset/images/tourism-leisure-survival-scout-freedom.jpg')}}" class="w-full h-full object-cover" alt="Kalijhora">
+                            <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2">
+                                <p class="font-semibold">Kalijhora</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Recent Activity Section -->
-            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                <h4 class="text-lg font-semibold text-gray-800 mb-4">Recent Bookings</h4>
+            <!-- Recent Bookings Table -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h4 class="text-lg font-semibold mb-4">Recent Bookings</h4>
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Customer</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Destination</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Status</th>
-                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Customer</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Destination</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Duration</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Amount</th>
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-                                <td class="px-6 py-4 whitespace-nowrap">Paris, France</td>
-                                <td class="px-6 py-4 whitespace-nowrap">2024-02-15</td>
-                                <td class="px-6 py-4 whitespace-nowrap">$1,200</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Paid</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Confirmed</span>
-                                </td>
+                                <td class="px-6 py-4">Rahul Sharma</td>
+                                <td class="px-6 py-4">Darjeeling</td>
+                                <td class="px-6 py-4">5 Days</td>
+                                <td class="px-6 py-4">₹25,000</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-green-100 text-green-800 rounded-full">Active</span></td>
                             </tr>
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">Jane Smith</td>
-                                <td class="px-6 py-4 whitespace-nowrap">Rome, Italy</td>
-                                <td class="px-6 py-4 whitespace-nowrap">2024-03-20</td>
-                                <td class="px-6 py-4 whitespace-nowrap">$950</td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Pending</span>
-                                </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">Pending</span>
-                                </td>
+                                <td class="px-6 py-4">Priya Patel</td>
+                                <td class="px-6 py-4">Sikkim</td>
+                                <td class="px-6 py-4">7 Days</td>
+                                <td class="px-6 py-4">₹35,000</td>
+                                <td class="px-6 py-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">Pending</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <!-- Sales Report Graph -->
-            <div class="bg-white rounded-lg shadow-sm p-6">
-                <h4 class="text-lg font-semibold text-gray-800 mb-4">Sales Report</h4>
-                <canvas id="salesReportChart"></canvas>
-            </div>
         </div>
     </div>
 </div>
-@endsection
 
-@push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const ctx = document.getElementById('salesReportChart').getContext('2d');
-    const salesReportChart = new Chart(ctx, {
-        type: 'line', // Change to 'bar', 'pie', etc., as needed
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Example months
-            datasets: [{
-                label: 'Revenue ($)',
-                data: [1200, 1900, 3000, 5000, 2300, 4200], // Example data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                tension: 0.4,
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                },
+    document.addEventListener('DOMContentLoaded', function() {
+        // Pie Chart
+        const pieCtx = document.getElementById('pieChart');
+        new Chart(pieCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Darjeeling', 'Sikkim', 'Kalijhora', 'Gangtok'],
+                datasets: [{
+                    data: [30, 25, 20, 25],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FFCE56',
+                        '#4BC0C0'
+                    ]
+                }]
             },
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Months',
-                    }
-                },
-                y: {
-                    title: {
-                        display: true,
-                        text: 'Revenue ($)',
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
                     }
                 }
             }
-        }
+        });
+
+        // Bar Chart
+        const barCtx = document.getElementById('barChart');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                datasets: [{
+                    label: 'Bookings',
+                    data: [65, 59, 80, 81, 56],
+                    backgroundColor: '#36A2EB'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
     });
 </script>
-@endpush
+@endsection

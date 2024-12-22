@@ -2,395 +2,257 @@
 @section('content')
     @include('pages.admin.component.sidebar')
 
-
-    {{-- for date picker --}}
-
-    <div class="p-4 sm:ml-64 ">
-        <div class="w-full flex">
-            <div class="grow">
-                {{-- date picker --}}
-                <div id="date-range-picker" date-rangepicker class="flex items-center">
-                    <div class="">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                        </div>
-                        <input id="datepicker-range-start" name="start" type="text"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Select date start">
-                    </div>
-                    <span class="mx-4 text-gray-500">to</span>
-                    <div class="">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path
-                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                            </svg>
-                        </div>
-                        <input id="datepicker-range-end" name="end" type="text"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="Select date end">
-                    </div>
-                </div>
-            </div>
-
-                {{-- export dropdown --}}
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                    class=  "justify-self-end text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex  items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button">Export as <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
-                </button>
-
-                <!-- Dropdown menu -->
-                <div id="dropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Export
-                                CSV</a>
-                        </li>
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Export
-                                PDF</a>
-                        </li>
-
-                    </ul>
-                </div>
-                {{-- export dropdown end  --}}
+    <div class="p-4 sm:ml-64">
+        <!-- Page Header -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Transaction History</h1>
+            <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">View and manage all transaction records</p>
         </div>
-        {{-- <div class="flex justify-center items-center h-screen"> --}}
 
+        <!-- Stats Cards Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white rounded-lg shadow p-4 dark:bg-gray-800">
+                <h3 class="text-gray-500 text-sm">Total Transactions</h3>
+                <p class="text-2xl font-bold">2,451</p>
+                <span class="text-green-500 text-sm">+12.5% from last month</span>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 dark:bg-gray-800">
+                <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+                <p class="text-2xl font-bold">$124,550</p>
+                <span class="text-green-500 text-sm">+8.2% from last month</span>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 dark:bg-gray-800">
+                <h3 class="text-gray-500 text-sm">Average Transaction</h3>
+                <p class="text-2xl font-bold">$890</p>
+                <span class="text-red-500 text-sm">-2.1% from last month</span>
+            </div>
+            <div class="bg-white rounded-lg shadow p-4 dark:bg-gray-800">
+                <h3 class="text-gray-500 text-sm">Pending Transactions</h3>
+                <p class="text-2xl font-bold">24</p>
+                <span class="text-yellow-500 text-sm">5 require attention</span>
+            </div>
+        </div>
 
+        <!-- Filters and Actions Bar -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6 dark:bg-gray-800">
+            <div class="flex flex-wrap gap-4 justify-between items-center">
+                <!-- Date Range Picker -->
+                <div class="flex items-center gap-4">
+                    <input type="date" class="rounded-lg border-gray-300 dark:bg-gray-700">
+                    <span class="text-gray-500">to</span>
+                    <input type="date" class="rounded-lg border-gray-300 dark:bg-gray-700">
+                </div>
 
-
-
-
-
-        {{-- history tables --}}
-
-
-
-
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div class="flex flex-column sm:flex-row flex-wrap space-y-4 sm:space-y-0 items-center justify-between pb-4">
-                <div>
-                    <button id="dropdownRadioButton" data-dropdown-toggle="dropdownRadio"
-                        class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                        type="button">
-                        <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 me-3" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
-                        </svg>
-                        Last 30 days
-                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
+                <!-- Action Buttons -->
+                <div class="flex gap-3">
+                    <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Export CSV
                     </button>
-                    <!-- Dropdown menu -->
-                    <div id="dropdownRadio"
-                        class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-                        data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="top"
-                        style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);">
-                        <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownRadioButton">
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-1" type="radio" value="" name="filter-radio"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="filter-radio-example-1"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                        day</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input checked="" id="filter-radio-example-2" type="radio" value=""
-                                        name="filter-radio"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="filter-radio-example-2"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                        7 days</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-3" type="radio" value="" name="filter-radio"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="filter-radio-example-3"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                        30 days</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-4" type="radio" value="" name="filter-radio"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="filter-radio-example-4"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                        month</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input id="filter-radio-example-5" type="radio" value="" name="filter-radio"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="filter-radio-example-5"
-                                        class="w-full ms-2 text-sm font-medium text-gray-900 rounded dark:text-gray-300">Last
-                                        year</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <button class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">
+                        Print Report
+                    </button>
                 </div>
+            </div>
+        </div>
 
-                <label for="table-search" class="sr-only">Search</label>
-                <div class="relative ">
-                    <div
-                        class="absolute  inset-y-0 left-0 rtl:inset-r-0 rtl:right-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor"
-                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <input type="text" id="table-search"
-                        class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search for items">
+        <!-- Transaction Table -->
+        <div class="bg-white rounded-lg shadow dark:bg-gray-800">
+            <div class="p-4 border-b dark:border-gray-700">
+                <div class="flex justify-between items-center">
+                    <input type="search"
+                           placeholder="Search transactions..."
+                           class="rounded-lg border-gray-300 w-64 dark:bg-gray-700">
+                    <select class="rounded-lg border-gray-300 dark:bg-gray-700">
+                        <option>All Statuses</option>
+                        <option>Completed</option>
+                        <option>Pending</option>
+                        <option>Failed</option>
+                    </select>
                 </div>
             </div>
 
+            <table class="w-full text-sm text-left">
+                <thead class="bg-gray-50 dark:bg-gray-700">
+                    <tr>
+                        <th class="px-6 py-3">Transaction ID</th>
+                        <th class="px-6 py-3">Customer</th>
+                        <th class="px-6 py-3">Amount</th>
+                        <th class="px-6 py-3">Status</th>
+                        <th class="px-6 py-3">Date</th>
+                        <th class="px-6 py-3">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Sample row - Repeat as needed -->
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-789456</td>
+                        <td class="px-6 py-4">john.doe@example.com</td>
+                        <td class="px-6 py-4">$2,999</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                Completed
+                            </span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-15</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785512</td>
+                        <td class="px-6 py-4">sarah.wilson@gmail.com</td>
+                        <td class="px-6 py-4">$1,499</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-14</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
 
-            <table id="export-table">
-                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <tr>
-                            <th scope="col" class="p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-all-search" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                                </div>
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                email id
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                phone number
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                transaction id
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                amount
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                date
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                action
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-1" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-1" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail1@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                +1 800 444 4444
-                            </td>
-                            <td class="px-6 py-4">
-                                VADE0B248932
-                            </td>
-                            <td class="px-6 py-4">
-                                $2999
-                            </td>
-                            <td class="px-6 py-4">
-                                14/07/2024
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785513</td>
+                        <td class="px-6 py-4">mike.brown@yahoo.com</td>
+                        <td class="px-6 py-4">$3,299</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pending</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-13</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
 
-                            </td>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785514</td>
+                        <td class="px-6 py-4">emma.davis@hotmail.com</td>
+                        <td class="px-6 py-4">$899</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-12</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
 
-                        </tr>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-2" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-2" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail2@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                +1 213 621 0002
-                            </td>
-                            <td class="px-6 py-4">
-                                JUI7000013PO
-                            </td>
-                            <td class="px-6 py-4">
-                                $1999
-                            </td>
-                            <td class="px-6 py-4">
-                                18/09/2024
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-search-3" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-search-3" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail3@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                +1 650-555-3434
-                            </td>
-                            <td class="px-6 py-4">
-                                QWE700000LOP
-                            </td>
-                            <td class="px-6 py-4">
-                                $99
-                            </td>
-                            <td class="px-6 py-4">
-                                15/05/2024
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785515</td>
+                        <td class="px-6 py-4">alex.turner@outlook.com</td>
+                        <td class="px-6 py-4">$2,199</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Failed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-11</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
 
-                        </tr>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-3" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail4@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                + 1800 801 920
-                            </td>
-                            <td class="px-6 py-4">
-                                AMJ7004852KL
-                            </td>
-                            <td class="px-6 py-4">
-                                $179
-                            </td>
-                            <td class="px-6 py-4">
-                                07/10/2023
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785516</td>
+                        <td class="px-6 py-4">lisa.zhang@gmail.com</td>
+                        <td class="px-6 py-4">$1,799</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-10</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
 
-                        </tr>
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-3" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail5@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                +44 20 8759 9036
-                            </td>
-                            <td class="px-6 py-4">
-                                KL87054215BH
-                            </td>
-                            <td class="px-6 py-4">
-                                $699
-                            </td>
-                            <td class="px-6 py-4">
-                                04/05/2024
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                        <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="w-4 p-4">
-                                <div class="flex items-center">
-                                    <input id="checkbox-table-3" type="checkbox"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                    <label for="checkbox-table-3" class="sr-only">checkbox</label>
-                                </div>
-                            </td>
-                            <th scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                testemail6@gmail.com
-                            </th>
-                            <td class="px-6 py-4">
-                                +1 513 621 112
-                            </td>
-                            <td class="px-6 py-4">
-                                NMKJ196453O
-                            </td>
-                            <td class="px-6 py-4">
-                                $3999
-                            </td>
-                            <td class="px-6 py-4">
-                                04/10/2022
-                            </td>
-                            <td class="px-6 py-4">
-                                <a href="#"
-                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785517</td>
+                        <td class="px-6 py-4">david.miller@yahoo.com</td>
+                        <td class="px-6 py-4">$4,599</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pending</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-09</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785518</td>
+                        <td class="px-6 py-4">sophia.garcia@outlook.com</td>
+                        <td class="px-6 py-4">$999</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-08</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785519</td>
+                        <td class="px-6 py-4">james.wilson@gmail.com</td>
+                        <td class="px-6 py-4">$2,899</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-red-100 text-red-800 rounded-full text-xs">Failed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-07</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785520</td>
+                        <td class="px-6 py-4">olivia.smith@hotmail.com</td>
+                        <td class="px-6 py-4">$1,299</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">Completed</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-06</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+
+                    <tr class="border-b dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <td class="px-6 py-4 font-medium">#TRX-785521</td>
+                        <td class="px-6 py-4">ryan.taylor@gmail.com</td>
+                        <td class="px-6 py-4">$3,499</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">Pending</span>
+                        </td>
+                        <td class="px-6 py-4">2024-02-05</td>
+                        <td class="px-6 py-4">
+                            <button class="text-blue-600 hover:underline">View</button>
+                            <button class="text-red-600 hover:underline ml-3">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="p-4 border-t dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-700 dark:text-gray-400">
+                        Showing 1 to 10 of 50 entries
+                    </span>
+                    <div class="flex gap-2">
+                        <button class="px-3 py-1 rounded border dark:border-gray-600">Previous</button>
+                        <button class="px-3 py-1 rounded border dark:border-gray-600">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 @endsection
