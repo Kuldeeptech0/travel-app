@@ -1,0 +1,31 @@
+@import 'app.css';
+
+@layer components {
+    .form-holder.active .toggle-box::before {
+        @apply sm:left-1/2 sm:top-0 top-[70%] left-0;
+      }
+
+    .toggle-panel {
+        @apply transition-all duration-700 ease-in-out;
+    }
+
+    .toggle-panel.toggle-left{
+        @apply left-0 delay-[1.2s];
+    }
+
+    .form-holder.active .toggle-panel.toggle-left {
+        @apply sm:-left-1/2 -top-[30%] sm:top-[0%] delay-700;
+    }
+
+    .form-holder.active .toggle-panel.toggle-right{
+        @apply sm:right-0 delay-[1.2s] bottom-0;
+    }
+
+    .form-holder.active .login-form{
+        @apply sm:right-1/2 invisible transition-[visibility,all] duration-[0ms,700ms] delay-[1s,0s] bottom-[30%] sm:bottom-[0%];
+    }
+
+    .form-holder.active .register-form{
+        @apply sm:right-1/2 visible transition-all ease-in-out duration-700 delay-[1.2s] bottom-[30%] sm:bottom-[0%];
+    }
+}

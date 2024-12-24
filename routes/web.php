@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\UserManagement\UserManagementController;
 
 /**
  * Public Routes
@@ -18,6 +19,10 @@ Route::get('/package', function () {
 Route::get('/singlepackage', function () {
     return view('pages.home.singlepackage');
 })->name('singlepackage');
+
+Route::get('/auth', function () {
+    return view('common.auth');
+})->name('user.auth');
 
 /**
  * Admin Authentication Routes
@@ -64,6 +69,8 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::put('/packages/{package}', [PackageController::class, 'update'])->name('packages.update');
         Route::delete('/packages/{package}', [PackageController::class, 'destroy'])->name('packages.destroy');
         Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
+
+        Route::get('/user',[UserManagementController::class,'index'])->name('admin.user.index');
 
 
   });
