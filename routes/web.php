@@ -12,7 +12,7 @@ Route::get('/', function () {
     return view('pages.home.index');
 })->name('index');
 
-Route::get('/package', function () {
+Route::get('/packages', function () {
     return view('pages.packages.index');
 })->name('packages');
 
