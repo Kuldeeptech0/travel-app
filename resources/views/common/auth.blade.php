@@ -40,18 +40,30 @@
             </div>
             {{-- register form  --}}
             <div class="absolute register-form sm:w-1/2 sm:h-full w-full h-[70%] flex items-center sm:-right-0 text-center invisible transition-[visibility,all] duration-[0ms,700ms] delay-[1s,0s] bottom-0 z-10">
-                <form id="register-form" action="" class="p-4 w-full">
+                <form id="register-form" action="{{route('user.register')}}" class="p-4 w-full" method="post">
+                    @csrf
                     <h1 class="text-center text-4xl font-bold text-slate-600 mb-4">Register</h1>
                     {{-- name --}}
-                    <div class="flex mb-4">
-                        <span
+                    <div class="mb-4">
+                        <div class="flex">
+                            <span
                             class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
                             <i class="mdi mdi-account-circle w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
                         </span>
                         <input type="text" id="website-admin"
-                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('first_name') border-red-500 @enderror"
+                            name="first_name"
                             placeholder="First name">
+                        </div>
+                        @error('first_name')
+                        <div>
+                            <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                        </div>
+                        @enderror
                     </div>
+
+
+
                     {{-- last name  --}}
                     <div class="flex mb-4">
                         <span
@@ -60,6 +72,7 @@
                         </span>
                         <input type="text" id="website-admin"
                             class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="last_name"
                             placeholder="Last name">
                     </div>
                     {{-- email --}}
@@ -70,6 +83,7 @@
                         </span>
                         <input type="text" id="website-admin"
                             class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="email"
                             placeholder="Email">
                     </div>
                     {{-- password  --}}
@@ -80,6 +94,7 @@
                         </span>
                         <input type="text" id="website-admin"
                             class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="password"
                             placeholder="Password">
                     </div>
                     {{-- agree terms and conditions  --}}
@@ -88,7 +103,7 @@
                         <label for="checkbox-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree to the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
                     </div>
                     {{-- submit button  --}}
-                    <button type="button"
+                    <button type="submit"
                         class="px-5 py-2.5 w-full text-sm font-medium text-white inline-flex  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg justify-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                         Register
                     </button>

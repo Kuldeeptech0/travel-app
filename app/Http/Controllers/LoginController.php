@@ -3,10 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DTO\UserManagementDTO;
 use Illuminate\Support\Facades\Auth;
+use App\Http\DTO\Auth\UserRegisterDTO;
+use App\Http\Interfaces\Auth\AuthenticationInterface;
+use App\Http\Requests\UserManagement\UserRegisterRequest;
 
 class LoginController extends Controller
 {
+    private  $authService;
+    public function __construct(AuthenticationInterface $authService)
+    {
+        $this->authService = $authService;
+    }
     /**
      * Handle admin login request.
      */
@@ -42,5 +51,28 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login')->with('success', 'Logged out successfully!');
+    }
+
+    /**
+     * Handle user register request.
+     */
+    public function registerUser(UserRegisterRequest $request){
+        try {
+            $userData = UserRegisterDTO::fromRequest($request);
+            $userData = $this->authService->userRegistration($userData);
+            // Auto login after registration
+            Auth::attempt([
+                'email' => $userData->email,
+                'password' => $userData->password
+            ]);
+
+            return redirect()->route('index')
+                ->with('success', 'Registration successful! Welcome to our platform.');
+
+        } catch (\Exception $e) {
+            return back()
+                ->withInput()
+                ->withErrors(['error' => 'Registration failed. Please try again.']);
+        }
     }
 }

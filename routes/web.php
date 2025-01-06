@@ -20,9 +20,19 @@ Route::get('/singlepackage', function () {
     return view('pages.home.singlepackage');
 })->name('singlepackage');
 
+
+/**
+ * User Authentication Routes
+ */
 Route::get('/auth', function () {
     return view('common.auth');
 })->name('user.auth');
+
+Route::prefix('user')->group(function(){
+    Route::post('/login', [LoginController::class, 'login'])->name('user.login.process');
+    Route::post('/register', [LoginController::class, 'registerUser'])->name('user.register');
+});
+
 
 /**
  * Admin Authentication Routes
