@@ -68,11 +68,12 @@ class LoginController extends Controller
 
             return redirect()->route('index')
                 ->with('success', 'Registration successful! Welcome to our platform.');
-
         } catch (\Exception $e) {
             return back()
                 ->withInput()
-                ->withErrors(['error' => 'Registration failed. Please try again.']);
+                ->withErrors([
+                    'error' => 'Registration failed. Please try again.',
+                ]);
         }
     }
 }

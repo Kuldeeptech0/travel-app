@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\UserManagement;
 
+use Illuminate\Validation\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,6 +34,17 @@ class UserRegisterRequest extends FormRequest
                                         ->symbols()
                                         ->uncompromised(5)
                         ],
+        ];
+    }
+
+    public function after(): array{
+        return [
+            function (Validator $validator) {
+               $validator->errors()->merge([
+                    'register_form' => 'active',
+                    'registration_failed' => 'Registration failed. Please try again.'
+                ]);
+            },
         ];
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container w-full h-screen m-auto flex items-center justify-center">
-        <div class="form-holder relative w-[850px] sm:h-[550px] rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden bg-white m-5 h-[calc(100vh-20px)]">
+        <div class="form-holder relative w-[850px] sm:h-[550px] rounded-3xl shadow-[0_0_30px_rgba(0,0,0,0.2)] overflow-hidden bg-white m-5 h-[calc(100vh-20px)] {{ $errors->has('register_form') ? 'active' : '' }}">
             {{-- login form  --}}
             <div class="absolute login-form sm:w-1/2 sm:h-full sm:-right-0 flex items-center text-center z-10  transition-all ease-in-out duration-700 delay-[1.2s] w-full h-[70%] bottom-0">
                 <form id="login-form" action="" class="p-4 w-full">
@@ -53,6 +53,7 @@
                         <input type="text" id="website-admin"
                             class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('first_name') border-red-500 @enderror"
                             name="first_name"
+                            value="{{ old('first_name') }}"
                             placeholder="First name">
                         </div>
                         @error('first_name')
@@ -65,37 +66,61 @@
 
 
                     {{-- last name  --}}
-                    <div class="flex mb-4">
-                        <span
-                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                            <i class="mdi mdi-account-circle w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
-                        </span>
-                        <input type="text" id="website-admin"
-                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="last_name"
-                            placeholder="Last name">
+                    <div class="mb-4">
+                        <div class="flex">
+                            <span
+                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                <i class="mdi mdi-account-circle w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
+                            </span>
+                            <input type="text" id="website-admin"
+                                class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('last_name') border-red-500 @enderror"
+                                name="last_name"
+                                value="{{ old('last_name') }}"
+                                placeholder="Last name">
+                        </div>
+                        @error('last_name')
+                            <div>
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            </div>
+                        @enderror
                     </div>
                     {{-- email --}}
-                    <div class="flex mb-4">
-                        <span
-                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                            <i class="mdi mdi-email w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
-                        </span>
-                        <input type="text" id="website-admin"
-                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="email"
-                            placeholder="Email">
+                    <div class="mb-4">
+                        <div class="flex">
+                            <span
+                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                <i class="mdi mdi-email w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
+                            </span>
+                            <input type="text" id="website-admin"
+                                class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('email') border-red-500 @enderror"
+                                name="email"
+                                value="{{ old('email') }}"
+                                placeholder="Email">
+                        </div>
+                        @error('email')
+                            <div>
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            </div>
+                        @enderror
                     </div>
                     {{-- password  --}}
-                    <div class="flex mb-4">
-                        <span
-                            class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
-                            <i class="mdi mdi-lock w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
-                        </span>
-                        <input type="text" id="website-admin"
-                            class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="password"
-                            placeholder="Password">
+                    <div class="mb-4">
+                        <div class="flex">
+                            <span
+                                class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-s-md dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                                <i class="mdi mdi-lock w-4 h-4 text-gray-500 dark:text-gray-400 text-[1.25rem]"></i>
+                            </span>
+                            <input type="password" id="website-admin"
+                                class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') border-red-500 @enderror"
+                                name="password"
+                                value="{{ old('password') }}"
+                                placeholder="Password">
+                        </div>
+                        @error('password')
+                            <div>
+                                <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+                            </div>
+                        @enderror
                     </div>
                     {{-- agree terms and conditions  --}}
                     <div class="flex items-center mb-4">
