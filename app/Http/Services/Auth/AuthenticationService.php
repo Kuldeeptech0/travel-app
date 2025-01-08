@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use App\Http\DTO\Auth\UserRegisterDTO;
 use App\Http\Interfaces\Auth\AuthenticationInterface;
 use App\Http\Repository\User\UserRepositoryInterface;
@@ -23,7 +24,9 @@ class AuthenticationService implements AuthenticationInterface
 
     public function adminRegisterUser(array $userData){}
 
-    public function login(array $credentials){}
+    public function loginStatus(array $credentials):bool{
+        return Auth::attempt($credentials);
+    }
 
     public function logout(){}
 

@@ -29,7 +29,7 @@ Route::get('/auth', function () {
 })->name('user.auth');
 
 Route::prefix('user')->group(function(){
-    Route::post('/login', [LoginController::class, 'login'])->name('user.login.process');
+    Route::post('/login', [LoginController::class, 'loginUser'])->name('user.login.process');
     Route::post('/register', [LoginController::class, 'registerUser'])->name('user.register');
 });
 
