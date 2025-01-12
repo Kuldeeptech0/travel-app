@@ -19,9 +19,9 @@
                             </span>
                             <input type="text" id="website-admin"
                                 class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('email') border-red-500 @enderror"
-                                name="email" value="{{ old('email') }}" placeholder="Email">
+                                name="login_email" value="{{ old('login_email') }}" placeholder="Email">
                         </div>
-                        @error('email')
+                        @error('login_email')
                             <div>
                                 <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
                             </div>
@@ -36,14 +36,15 @@
                             </span>
                             <input type="password" id="website-admin"
                                 class="rounded-none rounded-e-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('password') border-red-500 @enderror"
-                                name="password" value="{{ old('password') }}" placeholder="Password">
+                                name="login_password" value="{{ old('login_password') }}" placeholder="Password">
                         </div>
-                        @error('password')
+                        @error('login_password')
                             <x-alerts.informative-alert
                             class="mt-4"
                             title="Password parameters missing"
-                            :messages="$errors->get('password')"
+                            :messages="$errors->get('login_password')"
                             maxHeightClass="max-h-[50px]"
+                            id="info-alert-password"
                             />
                         @enderror
                     </div>
